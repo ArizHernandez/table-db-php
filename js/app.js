@@ -94,8 +94,12 @@ async function obtenerDB(opcion) {
   if(opcion.value === '') return;
 
   // Obtener los valores de nuestra base de datos
-  const resp = await fetch(`http://localhost/conexion-db/actions/obtenerDatos.php?opcion=${opcion}`);
-  db = await resp.json();
+  try{
+    const resp = await fetch(`http://localhost/conexion-db/actions/obtenerDatos.php?opcion=${opcion}`);
+    db = await resp.json();
+  } catch (e){
+    console.log(e); 
+  }
   
   // Crear paginador
   createUIPaginador();
